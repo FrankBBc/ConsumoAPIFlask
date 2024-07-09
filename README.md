@@ -14,7 +14,7 @@ Esta aplicación utiliza Flask y la librería Transformers para proporcionar un 
 
     ```sh
     git clone https://github.com/FrankBBc/ConsumoAPIFlask.git
-    cd nombre-del-repositorio
+    cd ConsumoAPIFlask
     ```
 
 2. **Crea y activa un entorno virtual:**
