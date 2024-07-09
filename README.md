@@ -13,7 +13,7 @@ Esta aplicación utiliza Flask y la librería Transformers para proporcionar un 
 1. **Clona este repositorio:**
 
     ```sh
-    git clone https://github.com/FrankBBc/ConsumoAPIFlask.git
+    git clone https://github.com/FrankryCode/ConsumoAPIFlask.git
     cd ConsumoAPIFlask
     ```
 
