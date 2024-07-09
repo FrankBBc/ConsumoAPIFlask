@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificación de Textos</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        textarea {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            height: 100px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+        }
+        .loading {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Clasificación de Textos</h1>
+        <form id="classificationForm">
+            <label for="llamada">Ingrese su texto:</label>
+            <textarea id="llamada" name="llamada" required></textarea>
+            <button type="submit">Clasificar</button>
+        </form>
+        <div class="loading" id="loading">Procesando la clasificación...</div>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('classificationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const texto = document.getElementById('llamada').value;
+
+            // Muestra el mensaje de carga y oculta el resultado anterior
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('result').innerText = '';
+
+            axios.post('http://localhost:5010/clasificar', new URLSearchParams({
+                'llamada': texto
+            }))
+            .then(function (response) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('result').innerText = 'Clasificación: ' + response.data.label;
+            })
+            .catch(function (error) {
+                console.error(error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('result').innerText = 'Error al clasificar el texto.';
+            });
+        });
+    </script>
+</body>
+</html>
